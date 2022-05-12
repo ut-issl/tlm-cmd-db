@@ -1,0 +1,297 @@
+obc = "MOBC"
+Target = "OBC"
+PacketID = "0x78"
+"Enable/Disable" = "ENABLE"
+IsRestricted = "FALSE"
+"Local Var" = ""
+
+[[tlm_field]]
+type = "uint16_t"
+[[tlm_field.comp]]
+name = "PH.VER"
+bitlen = 3
+[[tlm_field.comp]]
+name = "PH.TYPE"
+bitlen = 1
+[[tlm_field.comp]]
+name = "PH.SH_FLAG"
+bitlen = 1
+[[tlm_field.comp]]
+name = "PH.APID"
+bitlen = 11
+
+
+[[tlm_field]]
+type = "uint16_t"
+[[tlm_field.comp]]
+name = "PH.SEQ_FLAG"
+bitlen = 2
+[[tlm_field.comp]]
+name = "PH.SEQ_COUNT"
+bitlen = 14
+
+
+[[tlm_field]]
+name = "PH.PACKET_LEN"
+type = "uint16_t"
+
+[[tlm_field]]
+name = "SH.VER"
+type = "uint8_t"
+
+[[tlm_field]]
+name = "SH.TI"
+type = "uint32_t"
+
+[[tlm_field]]
+name = "SH.TLM_ID"
+type = "uint8_t"
+is_hex = true
+
+[[tlm_field]]
+name = "SH.GLOBAL_TIME"
+type = "double"
+
+[[tlm_field]]
+name = "SH.ON_BOARD_SUBNET_TIME"
+type = "uint32_t"
+
+[[tlm_field]]
+name = "SH.DEST_FLAGS"
+type = "uint8_t"
+is_hex = true
+
+[[tlm_field]]
+name = "SH.DR_PARTITION"
+type = "uint8_t"
+
+[[tlm_field]]
+name = "CCSDS.RX.REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.rec_status"
+status = "2.7"
+
+[[tlm_field]]
+name = "CCSDS.RX.RET_FROM_IF_RX"
+type = "int32_t"
+exp = "(int32_t)gs_driver->info[0].rx.ret_from_if_rx"
+
+[[tlm_field]]
+name = "CCSDS.RX.LAST_DEST_TYPE"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.last_dest_type"
+status = "5.2"
+
+[[tlm_field]]
+name = "CCSDS.RX.LAST_REC_TIME"
+type = "uint32_t"
+exp = "(uint32_t)gs_driver->info[0].rx.last_rec_time"
+
+[[tlm_field]]
+name = "CCSDS.RX.CMD_ACK"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.cmd_ack"
+status = "13.1"
+
+[[tlm_field]]
+name = "CCSDS.TCTF.LAST_REC_TCTF_TYPE"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.tctf.last_rec_tctf_type"
+status = "3.2"
+
+[[tlm_field]]
+name = "CCSDS.TCTF.AD_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.tctf.ad_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "CCSDS.TCTF.BC_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.tctf.bc_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "CCSDS.TCTF.BD_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].rx.tctf.bd_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "CCSDS.TX.IS_VALID"
+type = "uint8_t"
+exp = "gs_driver->is_ccsds_tx_valid"
+status = "2.8"
+
+[[tlm_field]]
+name = "CCSDS.TX.SEND_CYCLE"
+type = "uint32_t"
+exp = "(uint32_t)gs_driver->info[0].tx.send_cycle"
+
+[[tlm_field]]
+name = "CCSDS.TX.VCID"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[0].tx.vcid"
+status = "3.3"
+
+[[tlm_field]]
+name = "CCSDS.TX.VCDU_COUNTER"
+type = "uint32_t"
+exp = "gs_driver->info[0].tx.vcdu_counter"
+
+[[tlm_field]]
+name = "CCSDS.TX.BUFFER_AVAILABLE"
+type = "uint8_t"
+exp = "gs_driver->ccsds_info.buffer_num"
+
+[[tlm_field]]
+name = "UART.CH"
+type = "uint8_t"
+exp = "gs_driver->driver_uart.uart_config.ch"
+
+[[tlm_field]]
+name = "UART.BAUDRATE"
+type = "uint32_t"
+exp = "gs_driver->driver_uart.uart_config.baudrate"
+
+[[tlm_field]]
+name = "UART.PARITY"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->driver_uart.uart_config.parity_settings"
+status = "5.3"
+
+[[tlm_field]]
+name = "UART.DATA_LENGTH"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->driver_uart.uart_config.data_length"
+status = "2.9"
+
+[[tlm_field]]
+name = "UART.STOP_BIT"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->driver_uart.uart_config.stop_bit"
+status = "3.4"
+
+[[tlm_field]]
+name = "UART.RX.REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.rec_status"
+status = "2.7"
+
+[[tlm_field]]
+name = "UART.RX.RET_FROM_IF_RX"
+type = "int32_t"
+exp = "(int32_t)gs_driver->info[1].rx.ret_from_if_rx"
+
+[[tlm_field]]
+name = "UART.RX.LAST_DEST_TYPE"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.last_dest_type"
+status = "5.2"
+
+[[tlm_field]]
+name = "UART.RX.LAST_REC_TIME"
+type = "uint32_t"
+exp = "(uint32_t)gs_driver->info[1].rx.last_rec_time"
+
+[[tlm_field]]
+name = "UART.RX.CMD_ACK"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.cmd_ack"
+status = "13.1"
+
+[[tlm_field]]
+name = "UART.TCTF.LAST_REC_TCTF_TYPE"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.tctf.last_rec_tctf_type"
+status = "3.2"
+
+[[tlm_field]]
+name = "UART.TCTF.AD_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.tctf.ad_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "UART.TCTF.BC_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.tctf.bc_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "UART.TCTF.BD_REC_STATUS"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].rx.tctf.bd_rec_status"
+status = "18.1"
+
+[[tlm_field]]
+name = "UART.TX.SEND_CYCLE"
+type = "uint32_t"
+exp = "(uint32_t)gs_driver->info[1].tx.send_cycle"
+
+[[tlm_field]]
+name = "UART.TX.VCID"
+type = "uint8_t"
+exp = "(uint8_t)gs_driver->info[1].tx.vcid"
+status = "3.3"
+
+[[tlm_field]]
+name = "UART.TX.VCDU_COUNTER"
+type = "uint32_t"
+exp = "gs_driver->info[1].tx.vcdu_counter"
+
+[[tlm_field]]
+name = "COP-1.TYPE_A_COUNTER"
+type = "uint8_t"
+exp = "gs_validate_info->type_a_counter"
+
+[[tlm_field]]
+name = "COP-1.TYPE_B_COUNTER"
+type = "uint8_t"
+exp = "gs_validate_info->type_b_counter"
+
+[[tlm_field]]
+name = "COP-1.LOCKOUT_FLAG"
+type = "uint8_t"
+exp = "gs_validate_info->lockout_flag"
+
+[[tlm_field]]
+name = "COP-1.RETRANSMIT_FLAG"
+type = "uint8_t"
+exp = "gs_validate_info->retransmit_flag"
+
+[[tlm_field]]
+name = "COP-1.POSITIVE_WINDOW_WIDTH"
+type = "uint8_t"
+exp = "gs_validate_info->positive_window_width"
+
+[[tlm_field]]
+name = "MS_TLM.VCDU.FLUSH_INTERVAL"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_ms_tlm_packet_handler->tc_packet_to_m_pdu.flush_interval"
+
+[[tlm_field]]
+name = "MS_TLM.VCDU.LAST_UPDATED"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_ms_tlm_packet_handler->tc_packet_to_m_pdu.last_updated"
+
+[[tlm_field]]
+name = "MS_TLM.VCDU.COUNTER"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_ms_tlm_packet_handler->vcdu_counter"
+
+[[tlm_field]]
+name = "RP_TLM.VCDU.FLUSH_INTERVAL"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_rp_tlm_packet_handler->tc_packet_to_m_pdu.flush_interval"
+
+[[tlm_field]]
+name = "RP_TLM.VCDU.LAST_UPDATED"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_rp_tlm_packet_handler->tc_packet_to_m_pdu.last_updated"
+
+[[tlm_field]]
+name = "RP_TLM.VCDU.COUNTER"
+type = "uint32_t"
+exp = "(uint32_t)DI_GS_rp_tlm_packet_handler->vcdu_counter"
+

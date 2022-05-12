@@ -1,0 +1,456 @@
+obc = "MOBC"
+Target = "OBC"
+PacketID = "0x26"
+"Enable/Disable" = "ENABLE"
+IsRestricted = "FALSE"
+"Local Var" = "uint8_t page = telemetry_frame->tlm_page_no;##int offset = TF_TLM_PAGE_SIZE * (telemetry_frame->tlm_page_no);"
+
+[[tlm_field]]
+type = "uint16_t"
+[[tlm_field.comp]]
+name = "PH.VER"
+bitlen = 3
+[[tlm_field.comp]]
+name = "PH.TYPE"
+bitlen = 1
+[[tlm_field.comp]]
+name = "PH.SH_FLAG"
+bitlen = 1
+[[tlm_field.comp]]
+name = "PH.APID"
+bitlen = 11
+
+
+[[tlm_field]]
+type = "uint16_t"
+[[tlm_field.comp]]
+name = "PH.SEQ_FLAG"
+bitlen = 2
+[[tlm_field.comp]]
+name = "PH.SEQ_COUNT"
+bitlen = 14
+
+
+[[tlm_field]]
+name = "PH.PACKET_LEN"
+type = "uint16_t"
+
+[[tlm_field]]
+name = "SH.VER"
+type = "uint8_t"
+
+[[tlm_field]]
+name = "SH.TI"
+type = "uint32_t"
+
+[[tlm_field]]
+name = "SH.TLM_ID"
+type = "uint8_t"
+is_hex = true
+
+[[tlm_field]]
+name = "SH.GLOBAL_TIME"
+type = "double"
+
+[[tlm_field]]
+name = "SH.ON_BOARD_SUBNET_TIME"
+type = "uint32_t"
+
+[[tlm_field]]
+name = "SH.DEST_FLAGS"
+type = "uint8_t"
+is_hex = true
+
+[[tlm_field]]
+name = "SH.DR_PARTITION"
+type = "uint8_t"
+
+[[tlm_field]]
+name = "PAGE_NO"
+type = "uint8_t"
+exp = "page"
+
+[[tlm_field]]
+name = "TLM0"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+0].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM1"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+1].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM2"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+2].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM3"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+3].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM4"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+4].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM5"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+5].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM6"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+6].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM7"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+7].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM8"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+8].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM9"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+9].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM10"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+10].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM11"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+11].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM12"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+12].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM13"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+13].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM14"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+14].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM15"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+15].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM16"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+16].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM17"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+17].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM18"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+18].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM19"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+19].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM20"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+20].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM21"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+21].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM22"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+22].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM23"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+23].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM24"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+24].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM25"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+25].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM26"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+26].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM27"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+27].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM28"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+28].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM29"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+29].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM30"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+30].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM31"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+31].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM32"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+32].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM33"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+33].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM34"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+34].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM35"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+35].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM36"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+36].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM37"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+37].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM38"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+38].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM39"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+39].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM40"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+40].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM41"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+41].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM42"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+42].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM43"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+43].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM44"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+44].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM45"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+45].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM46"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+46].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM47"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+47].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM48"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+48].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM49"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+49].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM50"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+50].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM51"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+51].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM52"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+52].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM53"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+53].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM54"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+54].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM55"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+55].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM56"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+56].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM57"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+57].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM58"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+58].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM59"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+59].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM60"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+60].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM61"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+61].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM62"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+62].tlm_func)"
+is_hex = true
+
+[[tlm_field]]
+name = "TLM63"
+type = "uint32_t"
+exp = "(uint32_t)(telemetry_frame->tlm_table[offset+63].tlm_func)"
+is_hex = true
+
