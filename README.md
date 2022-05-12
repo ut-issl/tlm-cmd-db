@@ -1,78 +1,143 @@
 # TlmCmd DB
 
-- C2A を搭載した OBC 以外を含めたすべてのコンポーネント（コンポ）についてのテレメトリ・コマンド（テレコマ）を，統一的に管理するための Database のマスターファイル．
-    - これによって，統一的な C2A の自動コード生成や，各コンポ試験時の WINGS 連携が可能となる．
-- これまで Excel マクロブックを用いていたが, 軽量化のため toml ファイルを用いることとした
-- 以下の理由より脱Excelが唱えられていた
-    - 動作が重い
-    - Excel に埋め込まれる VBA が git 管理しづらい．
-    - Windows 以外で使いづらい．
+- C2A を搭載した OBC 以外を含めたすべてのコンポーネント(コンポ)についてのテレメトリ・コマンド(テレコマ)を，統一的に管理するための Database のマスターファイル.
+    - これによって, 統一的な C2A の自動コード生成や, 各コンポ試験時の WINGS 連携が可能となる.
+
+## 想定しているディレクトリ構成
+
+```txt
+data
+├─ tlm-cmd-db: このレポジトリ
+├─ settings.json: tlm-cmd/settings_example.jsonをコピーして適切に書き換えた設定ファイル
+├─ DataBase
+│  ├─ TLM_DB
+│  │  ├─status.toml: statusを記述したtomlファイル
+│  │  ├─csv: calced_dataにあたるdata
+│  │  ├─md: 一覧表示用
+│  │  └─toml: 編集するファイル群
+│  │  　  ├─<db_prefix>_TLM_DB.toml: 共通部分をまとめたファイル
+│  │  　  ├─<db_prefix>_TLM_DB_<tlm_name1>.toml
+│  │  　  ├─<db_prefix>_TLM_DB_<tlm_name2>.toml
+│  │  　  └─...
+│  └─ CMD_DB
+│  　  ├─csv: calced_dataにあたるdata
+│  　  ├─md: 一覧表示用
+│  　  └─toml: 編集するファイル群
+│  　  　  ├─<db_prefix>_CMD_DB_BCT.toml
+│  　  　  └─<db_prefix>_CMD_DB_CMD_DB.toml
+├─ DataBaseAobc(optional)
+│  ├─ TLM_DB
+│  └─ CMD_DB
+└─ DataBaseAobc(optional)
+　  ├─ TLM_DB
+　  └─ CMD_DB
+```
+
+## 使い始めるまで
+
+```bash
+# 依存パッケージ(toml)のインストール
+pip install -r requirements.txt
+
+# 導入したいディレクトリ(`data`など)に移動
+cd <path_to_root_dir>
+
+# 導入したいディレクトリ(`data`など)にクローン
+git clone git@github.com:ut-issl/tlm-cmd-db.git
+# git clone https://github.com/ut-issl/tlm-cmd-db.git
+cd tlm-cmd-db
+git pull origin feature/excel2toml
+
+# tlm-cmd-dbと同じ階層(tlm-cmd-db内ではない)に`tlm-cmd-db/settings_example.json`を`settings.json`としてコピペ
+cd ..
+cp tlm-cmd-db/settings_example.json settings.json
+
+# 出力先のディレクトリを作成する(`DataBase`など)
+mkdir <output_dir>
+
+# ===================
+# `settings.json`内の設定を適切に書き換える(設定項目は後述)
+# ===================
+
+# 元となるデータベースからtomlファイルを生成
+# 以下で引数に元となるデータベースの`TLM_DB`, `CMD_DB`の親ディレクトリのパスを指定
+python tlm-cmd-db/convert2toml.py <path_to_input_db_root_path>
+
+# ===================
+# C2Aでコード生成する場合を考えて
+# dest_pathにあたるディレクトリが存在することを確認する.
+# ===================
+
+# ===================
+# TLM_DBのtomlファイルの共通部分を
+# <db_prefix>_TLM_DB.tomlに記述する
+# 少なくともファイルの作成は必須としている
+# ===================
+
+# 以下でエラーチェックをした上でcsvファイル/mdファイル/c2a関連プログラムを生成
+python tlm-cmd-db/check.py
+
+# ===================
+# 以降`<output_dir>/TLM_DB/toml/*.toml`, `<output_dir>/CMD_DB/toml/*.toml`を編集して
+# python tlm-cmd-db/check.py
+# を実行
+# ===================
+```
 
 ## 使い方
 
-### 前提
-
-* `status.toml`, `check.py`, `settings.json`が同じ階層にあること
-* `settings.json`が適切に記述されていること
-* `status.toml`が適切に記述されていること
-
-### コマンド
-
-* 既存のcsvファイル: 既存のExcelファイルと同じ階層にあるcsvファイル
-* 引数の順序は任意
+tomlファイルをチェックしてmdファイル/csvファイル/c2a関連プログラムを生成
 
 ```bash
-# <path_to_csv_dir>: csvファイルか, csvファイルが含まれるディレクトリ(ディレクトリ内の全てのcsvが対象)
-# 既存のCMD_DBのcsvファイルからtomlファイルを生成
-python check.py --cmd --input <path_to_csv_file_or_dir> --obc <mobc/aobc/tobc>
-# 既存のTLM_DBのcsvファイルからtomlファイルを生成
-python check.py --tlm --input <path_to_csv_file_or_dir> --obc <mobc/aobc/tobc>
-
-# tomlファイルをチェックしてmdファイルとcsvファイルを生成(settings.jsonが適切に設定されている場合)
 python check.py
+```
 
-# TLM_DB/CMD_DBのみ実行
-python check.py --tlm/--cmd
+既存のDBをtomlファイルベースのDBに変換(`settings.json`の`db_path`に出力)
 
-# settings.jsonで設定したパスとは異なるディレクトリにあるtomlファイルを対象にする場合
-# --tlm or --cmdの指定が必要
-python check.py --tlm/--cmd --toml <path_to_toml_dir>
+```bash
+python convert2toml.py <path_to_input_db_root_path>
+```
 
-# settings.jsonで設定したパスとは異なるディレクトリにmd/csvファイルを出力
-# --tlm or --cmdの指定が必要
-python check.py --tlm/--cmd --csv <path_to_csv_dir> --md <path_to_md_dir>
+### 実行例
 
-# settings.jsonで設定したパスとは異なるディレクトリにあるtomlファイルからsettings.jsonで設定したパスとは異なるディレクトリにmd/csvファイルを出力
-python check.py --tlm/--cmd --toml <path_to_toml_dir> --csv <path_to_csv_dir> --md <path_to_md_dir>
+以下は特に設定せずとも実行可能
+
+```bash
+# 既存のDBをtomlファイルベースのDBに変換(Examples/TLM_DB/toml_exampleとExacmples/CMD_DB/toml_exampleに出力)
+python convert2toml.py Examples/csv_input
+
+# tomlファイルをチェックしてmd/csv/c2aを出力
+python check.py
 ```
 
 ## settings.jsonの書き方
 
-* OBCの種類を大文字で記述することに注意する
-
-```json
+```jsonc
 {
-    "tlm": { // TLM_DB
-        "is_check": true, // デフォルトでエラーチェックを行うか
-        "path": { // check.pyからの相対パス
-            "csv": "TLM_DB/csv", // csvファイルの出力先
-            "md": "TLM_DB/md", // mdファイルの出力先
-            "toml": "TLM_DB/toml" // tomlファイルの出力先,入力元
+    "is_main_obc": true, // MOBCかどうか
+    "is_c2a_enable": true, // C2A関連プログラムを生成するか
+
+    "db_prefix": "SAMPLE_MOBC", // ファイル名のプレフィックス
+    "db_path": "Examples", // TLM_DB, CMD_DBが含まれるディレクトリのsettings.jsonからの相対パス
+    "dest_path": "Examples/C2A", // C2Aコードの出力先, settings.jsonからの相対パス
+    "max_tlm_num": 432, // 許容最大パケット
+
+    "other_obc_data": [ // "is_main_obc": true の場合のみ必要
+        {
+            "name": "AOBC", // DBの名前
+            "is_enable": true, // コード生成するか
+
+            "db_prefix": "SAMPLE_AOBC", // ファイル名のプレフィックス
+            "db_path": "Examples/AOBC", // TLM_DB, CMD_DBが含まれるディレクトリのsettings.jsonからの相対パス
+            "dest_path": "Examples/C2A/AOBC", // C2Aコードの出力先, settings.jsonからの相対パス
+            "max_tlm_num": 1000, // 許容最大パケット
+
+            // tlm-buffer.c, tlm-buffer.h生成に必要な設定
+            "driver_name": "aobc_driver",
+            "driver_type": "AOBC_Driver",
+            "code_when_tlm_not_found": "aobc_driver->info.comm.rx_err_code = AOBC_RX_ERR_CODE_TLM_NOT_FOUND;"
         }
-    },
-    "cmd": { // CMD_DB
-        "is_check": true, // デフォルトでエラーチェックを行うか
-        "path": { // check.pyからの相対パス
-            "csv": "CMD_DB/csv", // csvファイルの出力先
-            "md": "CMD_DB/md", // mdファイルの出力先
-            "toml": "CMD_DB/toml" // tomlファイルの出力先,入力元
-        }
-    },
-    "obc_data": { // 各OBCのデータ
-        "MOBC": { // 大文字
-            "max_packet": 432 // 許容最大パケット
-        }
-    }
+    ]
 }
 ```
 
@@ -81,6 +146,7 @@ python check.py --tlm/--cmd --toml <path_to_toml_dir> --csv <path_to_csv_dir> --
 * statusを下のように一つ一つ記述する
 * キー`[status.x.x]`を被らないように設定する
     * デフォルトでは`[status.<enumの取る値の数>.<index>]`としている
+* 実行時に同じ階層に`status.md`が生成される
 
 ```toml
 [status.2.1]
@@ -93,126 +159,20 @@ python check.py --tlm/--cmd --toml <path_to_toml_dir> --csv <path_to_csv_dir> --
 "*" = "N/A"
 ```
 
-なお, `check.py`を実行すると`status.md`が自動的に生成される
-
 ## tomlの書き方
 
-### TLM_DBの場合
-
-* 最初の5行は以下のような設定を置く
-
-```toml
-obc = "MOBC" # mobcなどを指定
-Target = "OBC"
-PacketID = "0x45"
-"Enable/Disable" = "ENABLE"
-IsRestricted = "FALSE"
-"Local Var" = ""
-```
-
-* 各フィールドは以下の例ような構成(bit圧縮なし)
-    * is_hex と status は排他なので片方のみ指定可能
-
-```toml
-[[tlm_field]] # 各フィールドの最初に設置
-name = "APP0_INITIALIZER" # Name
-type = "uint32_t" # Var. Type
-exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+0].initializer)" # Variable of Function Name
-is_hex = true # HEXの場合
-status = "6.1" # status.tomlで設定したキーを指定
-desc = "" # Desc.
-note = "" # Note
-```
-
-* bit圧縮がある場合は以下の例ような構成
-
-```toml
-[[tlm_field]] # 各フィールド最初に設置
-type = "uint16_t" # type と exp はここに設置
-[[tlm_field.comp]] # ビット圧縮をする各フィールドに設置
-name = "PH.VER" # Name
-bitlen = 3 # ビット長
-desc = "" # Desc. と Noteはcomp内に設置
-note = ""
-[[tlm_field.comp]]
-name = "PH.TYPE"
-bitlen = 1
-[[tlm_field.comp]]
-name = "PH.SH_FLAG"
-bitlen = 1
-[[tlm_field.comp]]
-name = "PH.APID"
-bitlen = 11
-```
-
-### CMD_DBの場合
-
-* 最初の行は以下のような設定を置く
-
-```toml
-obc = "MOBC"
-```
-
-* 各フィールドは以下のような構成
-    * パラメタは6つまで設定可能
-
-```toml
-[[C2A_CORE]] # 各フィールドの名前
-name = "Cmd_TMGR_UPDATE_UNIXTIME" # Name
-desc = "MOBC UNIXTIME修正コマンド" # Desc.
-note = "" # Note
-[[C2A_CORE.params]] # 各パラメタの最初に設置
-type = "double" # type
-desc = "unixtime" # 説明
-[[C2A_CORE.params]]
-type = "uint32_t"
-desc = "total_cycle"
-[[C2A_CORE.params]]
-type = "uint32_t"
-desc = "step"
-```
-
-### 指定できる`Var. Type`
-
-| type     | bit数 |
-| -------- | ----- |
-| int8_t   | 8     |
-| int16_t  | 16    |
-| int32_t  | 32    |
-| uint8_t  | 8     |
-| uint16_t | 16    |
-| uint32_t | 32    |
-| float    | 32    |
-| double   | 64    |
+`Examples/README.md`を参照
 
 ## エラーチェック内容
 
-### 共通
-
 * `settings.json`の設定内容
-
-### TLM_DB
-
-* `obc,Target,PacketID,Enable/Disable,IsRestricted,Local Var`が設定されていること
-* ビット圧縮している場合,ビット長の合計が型にあっていること
-* `Var. Type`が適当であること
-* 式の左カッコと右カッコの数が等しいこと
-* PH,SHが既定のものと一致していること
-* `HEX, STATUS, POLY`が排他であること
-* `status.toml`にstatusが網羅されていること
-
-## 自動コード生成(未実装)
-
-- C2A のコードは [c2a-tlm-cmd-code-generator](https://github.com/ut-issl/c2a-tlm-cmd-code-generator) で自動生成できる．
-
-## 開発者向け
-
-ディレクトリ構成
-
-* `modules`
-    * `csv2toml.py`: csvファイルからtomlファイルを出力
-    * `checktoml.py`: エラーチェック用
-    * `toml2mdcsv.py`: tomlファイルからcsvファイルやmdファイルを出力
-    * `utils.py`: 共通のデータ(settings.json, status.toml)や関数(パス取得, 引数チェック)など
-* `check.py`
-    * 実行部分
+* `status.toml`の設定内容
+* seq, block周りの文法ミス
+* max_tlm_numを超えないこと
+* TLM_DB
+    * `Target,PacketID,Enable/Disable,IsRestricted,Local Var`が設定されていること
+    * ビット圧縮している場合,ビット長の合計が型にあっていること
+    * `Type`が適当であること
+    * 式の左カッコと右カッコの数が等しいこと
+    * `HEX, STATUS, POLY`が排他であること
+* その他様々

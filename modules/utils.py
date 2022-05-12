@@ -1,9 +1,37 @@
-import json
-import toml
-import os
 from pathlib import Path
+import json
 
-typelist = {
+
+def get_path_list(path, db_prefix=None, suffix="csv"):
+    p = Path(path)
+    p_list = list(p.glob(f"*.{suffix}"))
+    if db_prefix is not None:
+        p_list = [p for p in p_list if db_prefix in str(p)]
+    return p_list
+
+
+def print_progress(txt):
+    def _print_progress(f):
+        def wrapper(*args, **kwargs):
+            print(f"START {txt}")
+            res = f(*args, **kwargs)
+            print(f"END {txt}")
+            return res
+        return wrapper
+    return _print_progress
+
+
+def err(p, data, txt):
+    return f"""
+-----error file-----
+{str(p)}
+-----error data-----
+{data}
+-----error txt-----
+{txt}"""
+
+
+type2bit = {
     "int8_t": 8,
     "int16_t": 16,
     "int32_t": 32,
@@ -13,79 +41,84 @@ typelist = {
     "float": 32,
     "double": 64,
 }
-dict_status = toml.load(open("status.toml"))["status"]
-dict_settings = json.load(open("settings.json"))
 
 
-def status2md(path_to_md="status.md"):
-    txt = """# Status Table\n
-Length|Index|Status
--|-|-
-"""
-    for length, dict_status_ in dict_status.items():
-        for index, status in dict_status_.items():
-            txt += f'{length}|{index}|{status}\n'
+class Util:
+    def check_param(self, *args):
+        if len(args) == 1:
+            assert args[0] in self.settings, f"settings.jsonに{args[0]}を定義してください"
         else:
-            continue
-    Path(path_to_md).write_text(txt)
+            for setting in self.settings[args[0]]:
+                assert args[1] in setting, f"settings.jsonに{args[0]}.{args[1]}を定義してください"
+
+    def check_path(self, setting, key, is_db=False):
+        def make_dirs(path):
+            if is_db:
+                (path / "TLM_DB" / "md").mkdir(exist_ok=True, parents=True)
+                (path / "TLM_DB" / "csv").mkdir(exist_ok=True, parents=True)
+                (path / "TLM_DB" / "toml").mkdir(exist_ok=True, parents=True)
+                (path / "CMD_DB" / "md").mkdir(exist_ok=True, parents=True)
+                (path / "CMD_DB" / "csv").mkdir(exist_ok=True, parents=True)
+                (path / "CMD_DB" / "toml").mkdir(exist_ok=True, parents=True)
+                (path / "TLM_DB" / "status.toml").touch(exist_ok=True)
+                if (path / "TLM_DB" / "status.toml").read_text() == "":
+                    (path / "TLM_DB" / "status.toml").write_text("[status]")
+        path = Path(self.path_base) / setting[key]
+        assert path.exists() and path.is_dir(), f'{str(path)}が存在しません.'
+        make_dirs(path)
+
+    @ staticmethod
+    def get_settings_json():
+        path_base = Path(__file__).parent.parent
+        if (Path(path_base) / "settings.json").exists():
+            dict_settings = json.load(open(path_base / "settings.json", encoding="utf-8"))
+            dict_settings["is_example"] = False
+            path_base = path_base
+        elif (Path(path_base.parent) / "settings.json").exists():
+            dict_settings = json.load(open(path_base.parent / "settings.json", encoding="utf-8"))
+            dict_settings["is_example"] = False
+            path_base = path_base.parent
+        else:
+            is_init = True
+            res = ""
+            while res not in ["yes", "no"]:
+                if is_init:
+                    is_init = False
+                    print(f"---warning settings.jsonが存在しないため, settings_example.jsonに従って実行します.")
+                    print(f"---warning よろしいですか: yes / no")
+                else:
+                    print(f"---warning yes か no を入力してください")
+                res = input()
+            if res == "no":
+                raise NameError("settings_example.jsonをコピーしてsettings.jsonを作成した上で実行してください")
+            dict_settings = json.load(open(path_base / "settings_example.json", encoding="utf-8"))
+            dict_settings["is_example"] = True
+        return dict_settings, path_base
 
 
-def get_path(path, suffix=None):
-    p = Path(path)
-    assert p.exists()
-
-    if p.is_file():
-        return [p]
-    elif p.is_dir():
-        if suffix is not None:
-            return list(p.glob(f"*.{suffix}"))
-
-
-def _make_dirs(opt, is_tlm=False, is_cmd=False):
-    if is_tlm:
-        os.makedirs(opt.tlm_md, exist_ok=True)
-        os.makedirs(opt.tlm_csv, exist_ok=True)
-        os.makedirs(opt.tlm_toml, exist_ok=True)
-    if is_cmd:
-        os.makedirs(opt.cmd_md, exist_ok=True)
-        os.makedirs(opt.cmd_csv, exist_ok=True)
-        os.makedirs(opt.cmd_toml, exist_ok=True)
-
-
-def checksettings(opt):
-    try:
-        opt.is_tlm = False
-        opt.is_cmd = False
-        if opt.input is not None:
-            assert opt.obc.upper() in dict_settings["obc_data"], f'settings.jsonで{opt.obc.upper()}(大文字)の設定を記述してください'
-            opt.is_tlm = opt.tlm
-            opt.is_cmd = opt.cmd
-        if opt.tlm:
-            opt.is_tlm = True
-            opt.tlm_md = dict_settings["tlm"]["path"]["md"] if opt.md is None else opt.md
-            opt.tlm_csv = dict_settings["tlm"]["path"]["csv"] if opt.csv is None else opt.csv
-            opt.tlm_toml = dict_settings["tlm"]["path"]["toml"] if opt.toml is None else opt.toml
-            _make_dirs(opt, is_tlm=True)
-            return opt
-        if opt.cmd:
-            opt.is_cmd = True
-            opt.cmd_md = dict_settings["cmd"]["path"]["md"] if opt.md is None else opt.md
-            opt.cmd_csv = dict_settings["cmd"]["path"]["csv"] if opt.csv is None else opt.csv
-            opt.cmd_toml = dict_settings["cmd"]["path"]["toml"] if opt.toml is None else opt.toml
-            _make_dirs(opt, is_cmd=True)
-            return opt
-        if dict_settings["tlm"]["is_check"]:
-            opt.is_tlm = True
-            opt.tlm_md = dict_settings["tlm"]["path"]["md"]
-            opt.tlm_csv = dict_settings["tlm"]["path"]["csv"]
-            opt.tlm_toml = dict_settings["tlm"]["path"]["toml"]
-            _make_dirs(opt, is_tlm=True)
-        if dict_settings["cmd"]["is_check"]:
-            opt.is_cmd = True
-            opt.cmd_md = dict_settings["cmd"]["path"]["md"]
-            opt.cmd_csv = dict_settings["cmd"]["path"]["csv"]
-            opt.cmd_toml = dict_settings["cmd"]["path"]["toml"]
-            _make_dirs(opt, is_cmd=True)
-        return opt
-    except BaseException:
-        raise NameError("settings.jsonの設定を確認してください")
+def get_exp_comp(_data):
+    exp_list = []
+    bitlen_list = []
+    if "exp" not in _data and "exp" in _data["comp"][0]:
+        is_exp_init = True
+        for i, data in enumerate(_data["comp"]):
+            if is_exp_init:
+                is_exp_init = False
+            if "exp" in data:
+                exp_list.append(data["exp"])
+                bitlen_list.append(data["bitlen"])
+                if not is_exp_init:
+                    _data["comp"][i].pop("exp")
+        # bit圧縮
+        maxbyte = type2bit[_data["type"]]
+        exp = f'({_data["type"]})('
+        for i, byte_ in enumerate(bitlen_list):
+            exp += f'({exp_list[i]} << {maxbyte-byte_} & {int("0b" + "1"*byte_ + "0"*(maxbyte-byte_), 0):#04x}) | '
+            exp = exp.replace("<< 0 ", "")
+            maxbyte -= byte_
+        exp = exp[:-3] + ")"
+        return exp
+    elif "exp" in _data:
+        return _data["exp"]
+    else:
+        return None

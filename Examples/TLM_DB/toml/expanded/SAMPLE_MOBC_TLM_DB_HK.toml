@@ -1,0 +1,1376 @@
+Target = "OBC"
+PacketID = "0xf0"
+"Enable/Disable" = "ENABLE"
+IsRestricted = "FALSE"
+"Local Var" = ""
+
+[[tlm]]
+type = "uint16_t"
+[[tlm.comp]]
+name = "PH.VER"
+bitlen = 3
+[[tlm.comp]]
+name = "PH.TYPE"
+bitlen = 1
+[[tlm.comp]]
+name = "PH.SH_FLAG"
+bitlen = 1
+[[tlm.comp]]
+name = "PH.APID"
+bitlen = 11
+
+
+[[tlm]]
+type = "uint16_t"
+[[tlm.comp]]
+name = "PH.SEQ_FLAG"
+bitlen = 2
+[[tlm.comp]]
+name = "PH.SEQ_COUNT"
+bitlen = 14
+
+
+[[tlm]]
+type = "uint16_t"
+name = "PH.PACKET_LEN"
+
+[[tlm]]
+type = "uint8_t"
+name = "SH.VER"
+
+[[tlm]]
+type = "uint32_t"
+name = "SH.TI"
+
+[[tlm]]
+type = "uint8_t"
+name = "SH.TLM_ID"
+is_hex = true
+
+[[tlm]]
+type = "double"
+name = "SH.GLOBAL_TIME"
+
+[[tlm]]
+type = "uint32_t"
+name = "SH.ON_BOARD_SUBNET_TIME"
+
+[[tlm]]
+type = "uint8_t"
+name = "SH.DEST_FLAGS"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "SH.DR_PARTITION"
+
+[[tlm]]
+type = "uint8_t"
+name = "OBC_TCP_LAST_RECV_ACK"
+exp = "(uint8_t)(gs_driver->latest_info->rx.cmd_ack)"
+status = "13.1"
+desc = "最新TCPacket受信処理結果"
+note = "メモ"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "OBC_MM_STS"
+bitlen = 1
+exp = "(uint8_t)(mode_manager->stat)"
+status = "2.5"
+[[tlm.comp]]
+name = "OBC_MM_OPSMODE_PREV"
+bitlen = 7
+exp = "(uint8_t)(mode_manager->previous_id)"
+status = "17.1"
+
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD0_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 0)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD0_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 0)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD1_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 1)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD1_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 1)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD2_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 2)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD2_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 2)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD3_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 3)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD3_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 3)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD4_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 4)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD4_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 4)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD5_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 5)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD5_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 5)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD6_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 6)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD6_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 6)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD7_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 7)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD7_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 7)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD8_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 8)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD8_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 8)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD9_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 9)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD9_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 9)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD10_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 10)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "CMD10_TI"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, 10)"
+
+[[tlm]]
+type = "uint32_t"
+name = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_HIGH"
+exp = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_HIGH]"
+
+[[tlm]]
+type = "uint32_t"
+name = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_MIDDLE"
+exp = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_MIDDLE]"
+
+[[tlm]]
+type = "uint32_t"
+name = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_LOW"
+exp = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_LOW]"
+
+[[tlm]]
+type = "uint32_t"
+name = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_EL"
+exp = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_EL]"
+
+[[tlm]]
+type = "uint32_t"
+name = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_EH"
+exp = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_EH]"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)].init_duration)"
+
+[[tlm]]
+type = "uint8_t"
+name = "APP_PREV_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)].prev)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP0_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+0].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP0_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+0].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP0_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+0].init_duration)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP1_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+1].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP1_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+1].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP1_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+1].init_duration)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP2_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+2].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP2_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+2].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP2_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+2].init_duration)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP3_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+3].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP3_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+3].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP3_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+3].init_duration)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP4_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+4].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP4_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+4].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP4_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+4].init_duration)"
+
+[[tlm]]
+type = "uint32_t"
+name = "APP5_INITIALIZER"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+5].initializer)"
+is_hex = true
+
+[[tlm]]
+type = "uint32_t"
+name = "APP5_ENTRYPOINT"
+exp = "(uint32_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+5].entry_point)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "APP5_INIT_PROC_TIME"
+exp = "(uint8_t)(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+5].init_duration)"
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD_0_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 0)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM0"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[0]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM1"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[1]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM2"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[2]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM3"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[3]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM4"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[4]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_0_PARAM5"
+exp = "BCT_get_param_head(block_command_table->pos.block, 0)[5]"
+is_hex = true
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD_1_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 1)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM0"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[0]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM1"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[1]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM2"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[2]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM3"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[3]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM4"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[4]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_1_PARAM5"
+exp = "BCT_get_param_head(block_command_table->pos.block, 1)[5]"
+is_hex = true
+
+[[tlm]]
+type = "uint16_t"
+name = "CMD_2_ID"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, 2)"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM0"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[0]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM1"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[1]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM2"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[2]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM3"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[3]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM4"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[4]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "CMD_2_PARAM5"
+exp = "BCT_get_param_head(block_command_table->pos.block, 2)[5]"
+is_hex = true
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE0.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[0 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE0.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[0 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE0.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[0 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE0.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[0 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE0.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[0 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE0.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[0 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE1.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[1 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE1.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[1 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE1.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[1 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE1.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[1 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE1.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[1 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE1.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[1 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE2.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[2 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE2.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[2 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE2.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[2 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE2.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[2 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE2.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[2 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE2.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[2 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE3.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[3 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE3.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[3 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE3.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[3 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE3.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[3 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE3.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[3 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE3.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[3 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE4.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[4 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE4.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[4 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE4.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[4 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE4.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[4 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE4.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[4 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE4.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[4 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+name = "RULE5.SETTINGS.EVENT.GROUP"
+exp = "(uint8_t)rules[5 + offset].settings.event.group"
+
+[[tlm]]
+type = "uint32_t"
+name = "RULE5.SETTINGS.EVENT.LOCAL"
+exp = "(uint32_t)rules[5 + offset].settings.event.local"
+
+[[tlm]]
+type = "uint8_t"
+[[tlm.comp]]
+name = "RULE5.SETTINGS.EVENT.ERR_LEVEL"
+exp = "(uint8_t)rules[5 + offset].settings.event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.comp]]
+name = "RULE5.SETTINGS.SHOULD_MATCH_ERR_LEVEL"
+exp = "(uint8_t)rules[5 + offset].settings.should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.comp]]
+name = "RULE5.SETTINGS.IS_ACTIVE"
+exp = "(uint8_t)rules[5 + offset].settings.is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.comp]]
+name = "RULE5.SETTINGS.CONDITION.TYPE"
+exp = "(uint8_t)rules[5 + offset].settings.condition.type"
+bitlen = 3
+status = "3.1"
+
+
+[[tlm]]
+type = "uint8_t"
+exp = "event_logger->is_logging_enable[0]"
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE0"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE1"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE2"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE3"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE4"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE5"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE6"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE7"
+bitlen = 1
+
+
+[[tlm]]
+type = "uint8_t"
+exp = "event_logger->is_logging_enable[1]"
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE8"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE9"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE10"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE11"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE12"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE13"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE14"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE15"
+bitlen = 1
+
+
+[[tlm]]
+type = "uint8_t"
+exp = "event_logger->is_logging_enable[2]"
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE16"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE17"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE18"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE19"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE20"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE21"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE22"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE23"
+bitlen = 1
+
+
+[[tlm]]
+type = "uint8_t"
+exp = "event_logger->is_logging_enable[3]"
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE24"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE25"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE26"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE27"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE28"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE29"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE30"
+bitlen = 1
+[[tlm.comp]]
+name = "IS_LOGGING_ENABLE31"
+bitlen = 1
+
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS0.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 0)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS0.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 0)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS0.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 0)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS0.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 0)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS0.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 0)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS1.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 1)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS1.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 1)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS1.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 1)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS1.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 1)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS1.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 1)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS2.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 2)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS2.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 2)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS2.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 2)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS2.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 2)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS2.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 2)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS3.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 3)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS3.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 3)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS3.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 3)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.HIGH.EVENTS3.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 3)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.HIGH.EVENTS3.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_HIGH, 3)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS0.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 0)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS0.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 0)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS0.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 0)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS0.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 0)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS0.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 0)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS1.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 1)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS1.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 1)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS1.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 1)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS1.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 1)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS1.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 1)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS2.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 2)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS2.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 2)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS2.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 2)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS2.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 2)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS2.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 2)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS3.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 3)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS3.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 3)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS3.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 3)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.MIDDLE.EVENTS3.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 3)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.MIDDLE.EVENTS3.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_MIDDLE, 3)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS0.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 0)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS0.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 0)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS0.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 0)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS0.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 0)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS0.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 0)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS1.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 1)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS1.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 1)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS1.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 1)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS1.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 1)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS1.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 1)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS2.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 2)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS2.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 2)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS2.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 2)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS2.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 2)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS2.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 2)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS3.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 3)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS3.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 3)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS3.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 3)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS3.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 3)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS3.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 3)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS4.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 4)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS4.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 4)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS4.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 4)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS4.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 4)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS4.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 4)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS5.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 5)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS5.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 5)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS5.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 5)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.LOW.EVENTS5.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 5)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.LOW.EVENTS5.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_LOW, 5)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS0.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 0)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS0.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 0)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS0.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 0)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS0.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 0)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS0.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 0)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS1.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 1)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS1.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 1)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS1.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 1)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS1.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 1)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS1.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 1)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS2.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 2)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS2.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 2)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS2.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 2)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS2.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 2)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS2.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 2)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS3.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 3)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS3.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 3)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS3.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 3)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EL.EVENTS3.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 3)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EL.EVENTS3.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EL, 3)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS0.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 0)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS0.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 0)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS0.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 0)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS0.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 0)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS0.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 0)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS1.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 1)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS1.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 1)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS1.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 1)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS1.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 1)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS1.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 1)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS2.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 2)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS2.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 2)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS2.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 2)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS2.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 2)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS2.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 2)->note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS3.GROUP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 3)->group"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS3.LOCAL"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 3)->local"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS3.TIME.TOTAL_CYCLE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 3)->time.total_cycle"
+
+[[tlm]]
+type = "uint8_t"
+name = "TLOGS.EH.EVENTS3.TIME.STEP"
+exp = "(uint8_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 3)->time.step"
+
+[[tlm]]
+type = "uint32_t"
+name = "TLOGS.EH.EVENTS3.NOTE"
+exp = "(uint32_t)EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_EH, 3)->note"
+desc = "ここぐらいはu32でおろす"
+
