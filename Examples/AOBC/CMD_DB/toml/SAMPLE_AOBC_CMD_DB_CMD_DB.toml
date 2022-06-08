@@ -1,0 +1,213 @@
+CDH = []
+POWER = []
+COM = []
+MISSION = []
+PROP = []
+AOCS = []
+Thermal = []
+Trajectory = []
+HILS = []
+
+[[C2A_CORE]]
+name = "Cmd_NOP"
+params = 0
+desc = "ｿｽ_ｿｽ~ｿｽ[ｿｽRｿｽ}ｿｽｿｽｿｽh"
+code = "0x0000"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_SET_TIME"
+params = 1
+param1type = "uint32_t"
+param1desc = "TI"
+desc = "MOBCｿｽｿｽｿｽｿｽｿｽﾝ抵ｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_UPDATE_UNIXTIME"
+params = 3
+param1type = "double"
+param1desc = "unixtime"
+param2type = "uint32_t"
+param2desc = "total_cycle"
+param3type = "uint32_t"
+param3desc = "step"
+desc = "MOBC UNIXTIMEｿｽCｿｽｿｽｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_SET_UTL_UNIXTIME_EPOCH"
+params = 1
+param1type = "double"
+param1desc = "ult_unixtime_epoch"
+desc = "UTL_cmdｿｽﾅ用ｿｽｿｽｿｽｿｽunixtimeｿｽﾌ紀ｿｽｿｽｿｽｿｽﾏ更ｿｽｿｽｿｽｿｽ"
+note = "utl_unixtime_epoch [s]"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_SET_CYCLE_CORRECTION"
+params = 1
+param1type = "double"
+param1desc = "cycle_correction"
+desc = "CYCLES_PER_SECｿｽﾌ補正ｿｽ{ｿｽｿｽｿｽｿｽﾏ更ｿｽｿｽｿｽｿｽ, ｿｽｿｽｿｽｿｽｿｽlｿｽｿｽ1.0"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_RESET_CYCLE_CORRECTION"
+params = 0
+desc = "CYCLES_PER_SECｿｽﾌ補正ｿｽ{ｿｽｿｽｿｽｿｽ1.0ｿｽﾉ擾ｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_TMGR_CLEAR_UNIXTIME_INFO"
+params = 0
+desc = "unixtime_info_ ｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_AM_REGISTER_APP"
+params = 3
+param1type = "uint32_t"
+param1desc = "app_id"
+param2type = "uint32_t"
+param2desc = "init_ptr"
+param3type = "uint32_t"
+param3desc = "entry_ptr"
+desc = "ｿｽAｿｽvｿｽｿｽｿｽoｿｽ^ｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_AM_INITIALIZE_APP"
+params = 1
+param1type = "uint32_t"
+param1desc = "app_id"
+desc = "ｿｽAｿｽvｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_AM_EXECUTE_APP"
+params = 1
+param1type = "uint32_t"
+param1desc = "app_id"
+desc = "ｿｽAｿｽvｿｽｿｽｿｽｿｽｿｽsｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_AM_SET_PAGE_FOR_TLM"
+params = 1
+param1type = "uint8_t"
+desc = "ｿｽeｿｽｿｽｿｽｿｽｿｽgｿｽｿｽｿｽｿｽｿｽｿｽｿｽpｿｽyｿｽ[ｿｽWｿｽﾔ搾ｿｽｿｽﾝ抵ｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_AM_CLEAR_APP_INFO"
+params = 0
+is_danger = true
+desc = "ｿｽAｿｽvｿｽｿｽｿｽｿｽｿｽsｿｽｿｽｿｽﾔ計ｿｽｿｽｿｽﾌ擾ｿｽｿｽｿｽｿｽｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_MM_SET_MODE_LIST"
+params = 2
+param1type = "uint8_t"
+param1desc = "mode"
+param2type = "uint16_t"
+param2desc = "bc_index"
+desc = "ｿｽｿｽｿｽ[ｿｽhｿｽｿｽ`ｿｽｿｽｿｽXｿｽgｿｽﾝ抵ｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_MM_SET_TRANSITION_TABLE"
+params = 3
+param1type = "uint8_t"
+param1desc = "from_mode"
+param2type = "uint8_t"
+param2desc = "to_mode"
+param3type = "uint16_t"
+param3desc = "bc_index"
+desc = "ｿｽｿｽｿｽ[ｿｽhｿｽJｿｽﾚ抵ｿｽ`ｿｽeｿｽ[ｿｽuｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_MM_START_TRANSITION"
+params = 1
+param1type = "uint8_t"
+param1desc = "to_mode"
+desc = "ｿｽｿｽｿｽ[ｿｽhｿｽJｿｽﾚ開ｿｽnｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_MM_FINISH_TRANSITION"
+params = 0
+desc = "ｿｽｿｽｿｽ[ｿｽhｿｽJｿｽﾚ終ｿｽｿｽｿｽﾊ知ｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_MM_UPDATE_TRANSITION_TABLE_FOR_TLM"
+params = 0
+desc = "ｿｽｿｽｿｽ[ｿｽhｿｽｿｽTLMｿｽeｿｽ[ｿｽuｿｽｿｽｿｽｿｽｿｽXｿｽV"
+
+[[C2A_CORE]]
+name = "Cmd_TDSP_SET_TASK_LIST"
+params = 1
+param1type = "uint8_t"
+param1desc = "bc_index"
+desc = "ｿｽ^ｿｽXｿｽNｿｽｿｽｿｽXｿｽgｿｽﾝ抵ｿｽRｿｽ}ｿｽｿｽｿｽh"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_CLEAR_ALL_TIMELINE"
+params = 1
+param1type = "uint8_t"
+param1desc = "TL_ID"
+is_danger = true
+desc = "ｿｽSTLCｿｽoｿｽ^ｿｽｿｽｿｽｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_CLEAR_TIMELINE_AT"
+params = 2
+param1type = "uint8_t"
+param1desc = "TL_ID"
+param2type = "uint32_t"
+param2desc = "TI"
+desc = "TIｿｽwｿｽｿｽTLCｿｽoｿｽ^ｿｽｿｽｿｽｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_SET_LINE_NO_FOR_TIMELINE_TLM"
+params = 1
+param1type = "uint8_t"
+param1desc = "TL_ID"
+desc = "TLCｿｽ\ue27eｵ一覧ｿｽXｿｽV"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_DEPLOY_BLOCK"
+params = 2
+param1type = "uint8_t"
+param1desc = "TL_ID"
+param2type = "uint16_t"
+param2desc = "bc_index"
+desc = "BLCｿｽWｿｽJ "
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_SET_SOE_FLAG"
+params = 2
+param1type = "uint8_t"
+param1desc = "TL_ID"
+param2type = "uint8_t"
+desc = "ｿｽﾙ常時ｿｽｿｽｿｽsｿｽｿｽ~ｿｽ@ｿｽ\\ｿｽﾝ抵ｿｽ(ｿｽｿｽｿｽCｿｽｿｽｿｽﾔ搾ｿｽ, ｿｽtｿｽｿｽｿｽO)"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_SET_LOUT_FLAG"
+params = 2
+param1type = "uint8_t"
+param1desc = "TL_ID"
+param2type = "uint8_t"
+desc = "ｿｽｿｽｿｽsｿｽｿｽ~ｿｽ@ｿｽ\\ｿｽﾝ抵ｿｽ(ｿｽｿｽｿｽCｿｽｿｽｿｽﾔ搾ｿｽ, ｿｽtｿｽｿｽｿｽO)"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_SET_PAGE_FOR_TLM"
+params = 1
+param1type = "uint8_t"
+param1desc = "page_no"
+desc = "ｿｽeｿｽｿｽｿｽｿｽｿｽgｿｽｿｽｿｽｿｽｿｽｿｽｿｽpｿｽyｿｽ[ｿｽWｿｽﾔ搾ｿｽｿｽﾝ抵ｿｽ"
+
+[[C2A_CORE]]
+name = "Cmd_TLCD_CLEAR_ERR_LOG"
+params = 1
+param1type = "uint8_t"
+desc = "ｿｽﾅ新ｿｽﾌコｿｽ}ｿｽｿｽｿｽhｿｽｿｽｿｽsｿｽﾙ擾ｿｽLｿｽ^ｿｽｿｽｿｽNｿｽｿｽｿｽA"
+
+[[C2A_CORE]]
+name = "Cmd_GENERATE_TLM"
+params = 3
+param1type = "uint8_t"
+param1desc = "category"
+param2type = "uint8_t"
+param2desc = "TLM_ID"
+param3type = "uint8_t"
+param3desc = "ｿｽｿｽｿｽoｿｽｿｽ"
+desc = "TLMｿｽpｿｽPｿｽbｿｽgｿｽｿｽｿｽｿｽ"
+

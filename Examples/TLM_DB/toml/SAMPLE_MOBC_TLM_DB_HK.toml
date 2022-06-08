@@ -1,0 +1,240 @@
+# 必須の5項目
+Target = "OBC"
+PacketID = "0xf0"
+"Enable/Disable" = "ENABLE"
+IsRestricted = "FALSE"
+"Local Var" = ""
+
+# normal, expandedの67行目~
+[[tlm]]
+name = "OBC_TCP_LAST_RECV_ACK" # 必須
+type = "uint8_t" # 必須
+exp = "(uint8_t)(gs_driver->latest_info->rx.cmd_ack)"
+status = "13.1"
+# is_hex = true # status, polyと排他
+# a0 = 0.0 # status, is_hexと排他
+desc = "最新TCPacket受信処理結果"
+note = "メモ"
+
+# ビット圧縮, expandedの75行目~
+[[tlm]]
+type = "uint8_t" # 必須
+[[tlm.comp]]
+name = "OBC_MM_STS" # 必須
+bitlen = 1 # 必須
+exp = "(uint8_t)(mode_manager->stat)"
+status = "2.5"
+[[tlm.comp]]
+name = "OBC_MM_OPSMODE_PREV" # 必須
+bitlen = 7 # 必須
+exp = "(uint8_t)(mode_manager->previous_id)"
+status = "17.1"
+
+# block, expandedの89行目~
+[[tlm]]
+q_range = [0, 10] # 必須
+block_num = 2 # 必須, blockの数
+[[tlm.block]]
+name = "CMD??_ID" # ?? -> 数字
+type = "uint16_t"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, ??)" # ?? -> 数字
+is_hex = true
+[[tlm.block]]
+name = "CMD??_TI"
+type = "uint32_t"
+exp = "(uint32_t)BCT_get_ti(block_command_table->pos.block, ??)"
+
+# seq, expandedの210行目~
+[[tlm]]
+name_base = "EL_EVENT_COUNTER.COUNTERS.EL_ERROR_LEVEL_{}" # 必須
+exp_base = "event_handler->el_event_counter.counters[EL_ERROR_LEVEL_{}]"
+type = "uint32_t" # 共通の場合はここに記述
+seq_num = 5 # 必須
+[[tlm.seq]]
+name = "HIGH" # name_baseの{}を置換
+exp = "HIGH" # exp_baseの{}を置換
+[[tlm.seq]]
+name = "MIDDLE"
+exp = "MIDDLE"
+[[tlm.seq]]
+name = "LOW"
+exp = "LOW"
+[[tlm.seq]]
+name = "EL"
+exp = "EL"
+[[tlm.seq]]
+name = "EH"
+exp = "EH"
+
+# seq2, expandedの235行目~
+[[tlm]]
+name_base = "APP_{}"
+# (uint_16_t)のようにフィールドの型にキャストする場合には{type}とする
+# {type}がある場合は各フィールドにtypeを定義する
+exp_base = "{type}(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)].{})"
+seq_num = 4
+[[tlm.seq]]
+name = "INITIALIZER"
+exp = "initializer"
+type = "uint32_t"
+is_hex = true
+[[tlm.seq]]
+name = "ENTRYPOINT"
+exp = "entry_point"
+type = "uint32_t"
+is_hex = true
+[[tlm.seq]]
+name = "INIT_PROC_TIME"
+exp = "init_duration"
+type = "uint8_t"
+[[tlm.seq]]
+name = "PREV_PROC_TIME"
+exp = "prev"
+type = "uint8_t"
+
+# block.seq, expandedの257行目~
+[[tlm]]
+q_range = [0, 5]
+block_num = 1
+[[tlm.block]]
+name_base = "APP??_{}"
+exp_base = "{type}(app_manager->ais[(AM_TLM_PAGE_SIZE*app_manager->page_no)+??].{})"
+seq_num = 3
+[[tlm.block.seq]]
+name = "INITIALIZER"
+exp = "initializer"
+type = "uint32_t"
+is_hex = true
+[[tlm.block.seq]]
+name = "ENTRYPOINT"
+exp = "entry_point"
+type = "uint32_t"
+is_hex = true
+[[tlm.block.seq]]
+name = "INIT_PROC_TIME"
+exp = "init_duration"
+type = "uint8_t"
+
+# block.block, expandedの359行目~
+[[tlm]]
+q_range = [0, 2]
+block_num = 2
+[[tlm.block]]
+name = "CMD_??_ID"
+type = "uint16_t"
+exp = "(uint16_t)BCT_get_id(block_command_table->pos.block, ??)"
+is_hex = true
+[[tlm.block]]
+q_range = [0, 5]
+block_num = 1
+[[tlm.block.block]]
+name = "CMD_??_PARAM????" # ????->[0, 5], ??->[0, 2]
+type = "uint8_t"
+exp = "BCT_get_param_head(block_command_table->pos.block, ??)[????]"
+is_hex = true
+
+# block.seq.comp, expandedの485行目~
+[[tlm]]
+q_range = [0, 5]
+block_num = 1
+[[tlm.block]]
+name_base = "RULE??.SETTINGS.{}"
+exp_base = "{type}rules[?? + offset].settings.{}"
+seq_num = 3
+[[tlm.block.seq]]
+type = "uint8_t"
+name = "EVENT.GROUP"
+exp = "event.group"
+[[tlm.block.seq]]
+type = "uint32_t"
+name = "EVENT.LOCAL"
+exp = "event.local"
+[[tlm.block.seq]]
+type = "uint8_t"
+[[tlm.block.seq.comp]]
+name = "EVENT.ERR_LEVEL"
+exp = "event.err_level"
+bitlen = 3
+status = "5.1"
+[[tlm.block.seq.comp]]
+name = "SHOULD_MATCH_ERR_LEVEL"
+exp = "should_match_err_level"
+bitlen = 1
+status = "2.5"
+[[tlm.block.seq.comp]]
+name = "IS_ACTIVE"
+exp = "is_active"
+bitlen = 1
+status = "2.6"
+[[tlm.block.seq.comp]]
+name = "CONDITION.TYPE"
+exp = "condition.type"
+bitlen = 3
+status = "3.1"
+
+# block.comp.block, expandedの689行目~
+[[tlm]]
+q_range = [0, 3]
+block_num = 1
+[[tlm.block]]
+type = "uint8_t"
+exp = "event_logger->is_logging_enable[??]"
+[[tlm.block.comp]]
+q_range = [0, 7, 1] # ????を連続させる
+block_num = 1
+[[tlm.block.comp.block]]
+name = "IS_LOGGING_ENABLE????"
+bitlen = 1
+
+# block & seq, expandedの805行目~
+[[tlm]]
+block_num = 1
+seq_num = 5
+[[tlm.block]]
+# {{}}->tlm.seq内のname, {}->tlm.block.seq内のname, ??->tlm.seq内のq_range
+name_base = "TLOGS.{{}}.EVENTS??.{}"
+# {{}}->tlm.seq内のexp, {}->tlm.block.seq内のexp, ??->tlm.seq内のq_range
+exp_base = "{type}EL_get_the_nth_tlog_from_the_latest(EL_ERROR_LEVEL_{{}}, ??)->{}"
+seq_num = 5
+[[tlm.block.seq]]
+type = "uint8_t"
+name = "GROUP"
+exp = "group"
+[[tlm.block.seq]]
+type = "uint32_t"
+name = "LOCAL"
+exp = "local"
+[[tlm.block.seq]]
+type = "uint32_t"
+name = "TIME.TOTAL_CYCLE"
+exp = "time.total_cycle"
+[[tlm.block.seq]]
+type = "uint8_t"
+name = "TIME.STEP"
+exp = "time.step"
+[[tlm.block.seq]]
+type = "uint32_t"
+name = "NOTE"
+exp = "note"
+desc = "ここぐらいはu32でおろす"
+
+[[tlm.seq]]
+q_range = [0, 3]
+name = "HIGH"
+exp = "HIGH"
+[[tlm.seq]]
+q_range = [0, 3]
+name = "MIDDLE"
+exp = "MIDDLE"
+[[tlm.seq]]
+q_range = [0, 5]
+name = "LOW"
+exp =  "LOW"
+[[tlm.seq]]
+q_range = [0, 3]
+name = "EL"
+exp =  "EL"
+[[tlm.seq]]
+q_range = [0, 3]
+name = "EH"
+exp =  "EH"
