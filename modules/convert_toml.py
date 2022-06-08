@@ -1,7 +1,8 @@
 from pathlib import Path
 import toml
+import subprocess
 from .convert_base import TLMBase, SGCBase
-from .utils import print_progress, err, type2bit, get_exp_comp
+from .utils import print_progress, err, get_exp_comp
 
 
 class Toml2MdStatus:
@@ -164,8 +165,9 @@ class Toml2CsvTLM(TLMBase):
         (Path(self._path_to_csv) / f"{self.p.stem}.csv").write_text(self.txt, encoding=self.encoding, errors="ignore")
 
     def header_generator(self):
-        return f""",Target,{self._dict["Target"]},Local Var,,,,,,,,,,,,,,
-,PacketID,{self._dict["PacketID"]},{self._dict["Local Var"]},,,,,,,,,,,,,,
+        commit_id = subprocess.check_output("git rev-parse --short HEAD".split(), cwd=self._path_to_csv).strip().decode('utf-8')
+        return f""",Target,{self._dict["Target"]},Local Var,CommitID,,,,,,,,,,,,,
+,PacketID,{self._dict["PacketID"]},{self._dict["Local Var"]},{commit_id},,,,,,,,,,,,,
 ,Enable/Disable,{self._dict["Enable/Disable"]},,,,,,,,,,,,,,,
 ,IsRestricted,{self._dict["IsRestricted"]},,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,
@@ -340,7 +342,8 @@ class Toml2CsvSGC(SGCBase):
         (Path(self._path_to_csv) / f"{self.p.stem}.csv").write_text(self.txt, encoding=self.encoding, errors="ignore")
 
     def header_generator(self):
-        return """Component,Name,Target,Code,Params,,,,,,,,,,,,,Danger Flag,Is Restricted,Description,Note
+        commit_id = subprocess.check_output("git rev-parse --short HEAD".split(), cwd=self._path_to_csv).strip().decode('utf-8')
+        return f"""Component,Name,Target,Code,Params,,,,,,,,,,,,,Danger Flag,Is Restricted,Description,Note,{commit_id}
 MOBC,,,,Num Params,Param1,,Param2,,Param3,,Param4,,Param5,,Param6,,,,,
 Comment,,,,,Type,Description,Type,Description,Type,Description,Type,Description,Type,Description,Type,Description,,,,
 *,Cmd_EXAMPLE,OBC,,2,uint32_t,address,int32_t,time [ms],,,,,,,,,,,��,�����̐����ƒP�ʂ��������ƁI�i��Ftime [ms]�j"""

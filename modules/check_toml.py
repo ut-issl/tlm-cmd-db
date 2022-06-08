@@ -3,7 +3,6 @@ import toml
 import copy
 from abc import abstractmethod, ABCMeta
 
-from modules.check_base import check_max_tlm_num
 from .utils import get_path_list, type2bit, print_progress, err
 from .convert_toml import Toml2MdStatus, Toml2MdTLM, Toml2CsvTLM, Toml2MdSGC, Toml2CsvSGC, Toml2MdBCT, Toml2CsvBCT
 from .check_base import *
@@ -359,6 +358,7 @@ class CheckTomlTLM(CheckTomlBase):
     def __init__(self, setting, param_name="tlm"):
         self._param_name = param_name
         super().__init__(is_tlm=True)
+        self.max_tlm_num = setting["max_tlm_num"]
         toml2md = Toml2MdTLM
         toml2csv = Toml2CsvTLM
         setting["dict_status"] = Toml2MdStatus(setting["db_path"] / "TLM_DB" / "status.toml", setting).get_status()
@@ -394,6 +394,7 @@ class CheckTomlTLM(CheckTomlBase):
             self.init(p)  # 初期化
             self.check_meta()  # パラメタチェック
             self.check()  # 文法チェック
+            self.check_max_tlm_num()
 
             print("------expanding")
             _dict_output = self.expand()  # 展開
@@ -411,9 +412,7 @@ class CheckTomlTLM(CheckTomlBase):
         self.settings = setting
 
     def check_max_tlm_num(self):
-        check_json_param("max_tlm_num")
-        max_tlm_num = dict_settings["max_tlm_num"]
-        check_max_tlm_num(self.packet + self.packet_common, max_tlm_num)
+        check_max_tlm_num(self.packet + self.packet_common, self.max_tlm_num)
 
     def make_output_data(self):
         _dict_output = {}
