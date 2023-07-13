@@ -82,7 +82,7 @@ def get_header(line):
     header = [
         [
             "Comment",
-            "TLM Entry",
+            "TLM Field",
             "Onboard Software Info.",
             "",
             "Extraction Info.",
